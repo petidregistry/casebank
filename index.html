@@ -181,6 +181,38 @@
       <div class="dot"></div> LINK ACTIVE: <span id="active-user" style="margin-left:5px"></span>
     </div>
 
+    <div style="border-left: 2px solid var(--accent); padding-left: 20px; margin-bottom: 4rem;">
+      <h3 style="color: var(--accent); margin-top: 0;">SEARCH ARCHIVE HERE</h3>
+      <div class="grid" style="margin-bottom: 10px;">
+        <select id="searchCategory" style="border-color: var(--accent); margin-bottom: 0;">
+            <option value="">ALL CATEGORIES (Search Everything)</option>
+            <optgroup label="1. Dermatology"><option value="Dermatitis">Dermatitis</option><option value="Mange">Mange</option><option value="Fungal infections">Fungal infections</option><option value="Allergies">Allergies</option><option value="Wounds">Wounds</option></optgroup>
+            <optgroup label="2. Gastrointestinal (GI)"><option value="Vomiting">Vomiting</option><option value="Diarrhea">Diarrhea</option><option value="Foreign bodies">Foreign bodies</option><option value="Parvovirus">Parvovirus</option><option value="Gastritis">Gastritis</option></optgroup>
+            <optgroup label="3. Respiratory"><option value="Pneumonia">Pneumonia</option><option value="Kennel cough">Kennel cough</option><option value="Feline upper respiratory disease">Feline upper respiratory disease</option></optgroup>
+            <optgroup label="4. Cardiovascular"><option value="Heart disease">Heart disease</option><option value="Murmurs">Murmurs</option><option value="Congestive heart failure">Congestive heart failure</option></optgroup>
+            <optgroup label="5. Urogenital"><option value="UTIs">UTIs</option><option value="Kidney disease">Kidney disease</option><option value="Urinary obstruction">Urinary obstruction</option></optgroup>
+            <optgroup label="6. Reproductive"><option value="Pyometra">Pyometra</option><option value="Dystocia">Dystocia</option><option value="Infertility">Infertility</option></optgroup>
+            <optgroup label="7. Orthopedics / Musculoskeletal"><option value="Fractures">Fractures</option><option value="Lameness">Lameness</option><option value="Hip dysplasia">Hip dysplasia</option><option value="Ligament injuries">Ligament injuries</option></optgroup>
+            <optgroup label="8. Neurology"><option value="Seizures">Seizures</option><option value="Paralysis">Paralysis</option><option value="Nerve injuries">Nerve injuries</option></optgroup>
+            <optgroup label="9. Hematology / Oncology"><option value="Anemia">Anemia</option><option value="Tumors">Tumors</option><option value="Leukemia">Leukemia</option></optgroup>
+            <optgroup label="10. Endocrinology"><option value="Diabetes">Diabetes</option><option value="Hyperthyroidism">Hyperthyroidism</option><option value="Cushing’s">Cushing’s</option></optgroup>
+            <optgroup label="11. Infectious Diseases"><option value="Parvo">Parvo</option><option value="Distemper">Distemper</option><option value="Rabies">Rabies</option><option value="Tick-borne diseases">Tick-borne diseases</option></optgroup>
+            <optgroup label="12. Toxicology"><option value="Poisoning">Poisoning</option><option value="Drug reactions">Drug reactions</option><option value="Environmental toxins">Environmental toxins</option></optgroup>
+            <optgroup label="13. Emergency & Critical Care"><option value="Shock">Shock</option><option value="Trauma">Trauma</option><option value="Bleeding">Bleeding</option><option value="Collapse">Collapse</option></optgroup>
+            <optgroup label="14. Preventive Medicine"><option value="Vaccination protocols">Vaccination protocols</option><option value="Deworming">Deworming</option><option value="Parasite control">Parasite control</option></optgroup>
+            <optgroup label="15. Exotic Animal Medicine"><option value="Rabbits">Rabbits</option><option value="Reptiles">Reptiles</option><option value="Birds">Birds</option></optgroup>
+        </select>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="search" placeholder="Search keywords (symptoms, drugs, etc.)...">
+        <button class="btn btn-outline" style="width:120px" onclick="searchArchive()">Query</button>
+      </div>
+      
+      <div id="query-loader" class="query-spinner">[ /// ] QUERYING RECORDS...</div>
+      
+      <div id="results"></div>
+    </div>
+
     <div style="border-left: 2px solid var(--cyan); padding-left: 20px;">
       <h3 style="margin-top:0">NEW CLINICAL ENTRY</h3>
       
@@ -247,38 +279,6 @@
 
       <button class="btn btn-glow" onclick="uploadCase()">Commit to Records</button>
     </div>
-
-    <div style="margin-top: 4rem; border-left: 2px solid var(--accent); padding-left: 20px;">
-      <h3 style="color: var(--accent)">SEARCH ARCHIVE HERE</h3>
-      <div class="grid" style="margin-bottom: 10px;">
-        <select id="searchCategory" style="border-color: var(--accent); margin-bottom: 0;">
-            <option value="">ALL CATEGORIES (Search Everything)</option>
-            <optgroup label="1. Dermatology"><option value="Dermatitis">Dermatitis</option><option value="Mange">Mange</option><option value="Fungal infections">Fungal infections</option><option value="Allergies">Allergies</option><option value="Wounds">Wounds</option></optgroup>
-            <optgroup label="2. Gastrointestinal (GI)"><option value="Vomiting">Vomiting</option><option value="Diarrhea">Diarrhea</option><option value="Foreign bodies">Foreign bodies</option><option value="Parvovirus">Parvovirus</option><option value="Gastritis">Gastritis</option></optgroup>
-            <optgroup label="3. Respiratory"><option value="Pneumonia">Pneumonia</option><option value="Kennel cough">Kennel cough</option><option value="Feline upper respiratory disease">Feline upper respiratory disease</option></optgroup>
-            <optgroup label="4. Cardiovascular"><option value="Heart disease">Heart disease</option><option value="Murmurs">Murmurs</option><option value="Congestive heart failure">Congestive heart failure</option></optgroup>
-            <optgroup label="5. Urogenital"><option value="UTIs">UTIs</option><option value="Kidney disease">Kidney disease</option><option value="Urinary obstruction">Urinary obstruction</option></optgroup>
-            <optgroup label="6. Reproductive"><option value="Pyometra">Pyometra</option><option value="Dystocia">Dystocia</option><option value="Infertility">Infertility</option></optgroup>
-            <optgroup label="7. Orthopedics / Musculoskeletal"><option value="Fractures">Fractures</option><option value="Lameness">Lameness</option><option value="Hip dysplasia">Hip dysplasia</option><option value="Ligament injuries">Ligament injuries</option></optgroup>
-            <optgroup label="8. Neurology"><option value="Seizures">Seizures</option><option value="Paralysis">Paralysis</option><option value="Nerve injuries">Nerve injuries</option></optgroup>
-            <optgroup label="9. Hematology / Oncology"><option value="Anemia">Anemia</option><option value="Tumors">Tumors</option><option value="Leukemia">Leukemia</option></optgroup>
-            <optgroup label="10. Endocrinology"><option value="Diabetes">Diabetes</option><option value="Hyperthyroidism">Hyperthyroidism</option><option value="Cushing’s">Cushing’s</option></optgroup>
-            <optgroup label="11. Infectious Diseases"><option value="Parvo">Parvo</option><option value="Distemper">Distemper</option><option value="Rabies">Rabies</option><option value="Tick-borne diseases">Tick-borne diseases</option></optgroup>
-            <optgroup label="12. Toxicology"><option value="Poisoning">Poisoning</option><option value="Drug reactions">Drug reactions</option><option value="Environmental toxins">Environmental toxins</option></optgroup>
-            <optgroup label="13. Emergency & Critical Care"><option value="Shock">Shock</option><option value="Trauma">Trauma</option><option value="Bleeding">Bleeding</option><option value="Collapse">Collapse</option></optgroup>
-            <optgroup label="14. Preventive Medicine"><option value="Vaccination protocols">Vaccination protocols</option><option value="Deworming">Deworming</option><option value="Parasite control">Parasite control</option></optgroup>
-            <optgroup label="15. Exotic Animal Medicine"><option value="Rabbits">Rabbits</option><option value="Reptiles">Reptiles</option><option value="Birds">Birds</option></optgroup>
-        </select>
-      </div>
-      <div style="display: flex; gap: 10px;">
-        <input type="text" id="search" placeholder="Search keywords (symptoms, drugs, etc.)...">
-        <button class="btn btn-outline" style="width:120px" onclick="searchArchive()">Query</button>
-      </div>
-      
-      <div id="query-loader" class="query-spinner">[ /// ] QUERYING RECORDS...</div>
-      
-      <div id="results"></div>
-    </div>
   </div>
 </div>
 
@@ -328,7 +328,7 @@
       document.getElementById('auth').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       document.getElementById('active-user').innerText = currentVet.toUpperCase();
-      searchArchive();
+      // Removed searchArchive() so no records show on initial load
     } else {
       alert(res.msg || "Authentication Failure");
     }
@@ -381,7 +381,7 @@
       document.querySelectorAll('#dashboard input[type="text"], #dashboard textarea').forEach(i => { if(i.id !== 'search') i.value = ''; });
       document.getElementById('entryCategory').value = 'Uncategorized';
       fileInput.value = '';
-      searchArchive(); 
+      document.getElementById('results').innerHTML = ''; // Keep results area clear upon submission
     } else { alert(res.msg); }
   }
 
