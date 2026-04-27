@@ -253,7 +253,7 @@
       <textarea id="findings" placeholder="Physical exam notes, Key observations..."></textarea>
 
       <h4 class="section-title">5, 6 & 7. Diagnostics & Differential</h4>
-      <textarea id="diffDx" placeholder="👉 Differential Diagnoses (GOLD for learning: List 3–5 possibilities)"></textarea>
+      <textarea id="diffDx" placeholder="Differential Diagnoses (GOLD for learning: List 3–5 possibilities)"></textarea>
       <textarea id="diagnostics" placeholder="Diagnostics (Tests done, Results)"></textarea>
       <input type="text" id="finalDx" placeholder="Final Diagnosis">
 
@@ -262,17 +262,17 @@
       <input type="text" id="outcome" placeholder="Outcome">
 
       <h4 class="section-title">10 & 11. Reasoning & Takeaways</h4>
-      <textarea id="reasoning" placeholder="🔥 Clinical Reasoning (Your secret sauce: Explain why you made each decision)"></textarea>
+      <textarea id="reasoning" placeholder="Clinical Reasoning (Your secret sauce: Explain why you made each decision)"></textarea>
       <textarea id="takeaways" placeholder="Key Takeaways (2–4 bullet points)"></textarea>
 
       <div class="highlight-section">
-        <h4 style="margin-top:0; color: var(--accent);">🚀 WHAT MAKES YOUR VERSION DIFFERENT</h4>
+        <h4 style="margin-top:0; color: var(--accent);">WHAT MAKES YOUR VERSION DIFFERENT</h4>
         <textarea id="mistakes" placeholder="🔹 Common Mistakes (What young vets often get wrong)"></textarea>
         <textarea id="protocol" placeholder="🔹 Quick Protocol (Fast reference version)"></textarea>
       </div>
       
       <div style="margin-bottom: 1.5rem;">
-        <label style="font-size: 0.8rem; color: var(--cyan); display: block; margin-bottom: 5px;">ATTACH SCANS/IMAGES (MAX 3):</label>
+        <label style="font-size: 0.8rem; color: var(--cyan); display: block; margin-bottom: 5px;">ATTACH SCANS/IMAGES:</label>
         <input type="file" id="images" accept="image/*" multiple>
       </div>
 
@@ -352,10 +352,10 @@
     const getVal = id => document.getElementById(id).value.trim() || "N/A";
     
     const cat = document.getElementById('entryCategory').value;
-    const pHistory = `🏷️ CATEGORY: ${cat}\n\n⚠️ PRESENTING COMPLAINT:\n${getVal('complaint')}\n\n📖 HISTORY:\n${getVal('historyText')}`;
-    const pPhysical = `🩺 CLINICAL FINDINGS:\n${getVal('findings')}\n\n🔬 DIAGNOSTICS:\n${getVal('diagnostics')}`;
-    const pAnalysis = `🤔 DIFFERENTIAL DIAGNOSES:\n${getVal('diffDx')}\n\n✅ FINAL DIAGNOSIS:\n${getVal('finalDx')}\n\n🔥 CLINICAL REASONING:\n${getVal('reasoning')}\n\n📌 KEY TAKEAWAYS:\n${getVal('takeaways')}`;
-    const pAction = `💊 TREATMENT PLAN:\n${getVal('plan')}\n\n📈 OUTCOME:\n${getVal('outcome')}\n\n❌ COMMON MISTAKES:\n${getVal('mistakes')}\n\n⚡ QUICK PROTOCOL:\n${getVal('protocol')}`;
+    const pHistory = `CATEGORY: ${cat}\n\nPRESENTING COMPLAINT:\n${getVal('complaint')}\n\nHISTORY:\n${getVal('historyText')}`;
+    const pPhysical = `CLINICAL FINDINGS:\n${getVal('findings')}\n\nDIAGNOSTICS:\n${getVal('diagnostics')}`;
+    const pAnalysis = `DIFFERENTIAL DIAGNOSES:\n${getVal('diffDx')}\n\nFINAL DIAGNOSIS:\n${getVal('finalDx')}\n\nCLINICAL REASONING:\n${getVal('reasoning')}\n\nKEY TAKEAWAYS:\n${getVal('takeaways')}`;
+    const pAction = `TREATMENT PLAN:\n${getVal('plan')}\n\nOUTCOME:\n${getVal('outcome')}\n\nCOMMON MISTAKES:\n${getVal('mistakes')}\n\nQUICK PROTOCOL:\n${getVal('protocol')}`;
 
     const data = {
       action: 'feed',
