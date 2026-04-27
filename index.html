@@ -89,7 +89,7 @@
 
     /* --- CREATIVE PULSING ANIMATION --- */
     #global-loader {
-      display: none; /* Flex when active */
+      display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(5, 7, 10, 0.9);
@@ -328,7 +328,6 @@
       document.getElementById('auth').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       document.getElementById('active-user').innerText = currentVet.toUpperCase();
-      // Removed searchArchive() so no records show on initial load
     } else {
       alert(res.msg || "Authentication Failure");
     }
@@ -350,7 +349,7 @@
       document.getElementById('loader-text').innerText = "COMMITTING TO RECORDS...";
     }
 
-    // Pack the 14+ points intelligently into the existing 4 backend text variables using Markdown style
+    // Pack the 14+ points intelligently into the existing backend structure
     const getVal = id => document.getElementById(id).value.trim() || "N/A";
     
     const cat = document.getElementById('entryCategory').value;
@@ -381,7 +380,7 @@
       document.querySelectorAll('#dashboard input[type="text"], #dashboard textarea').forEach(i => { if(i.id !== 'search') i.value = ''; });
       document.getElementById('entryCategory').value = 'Uncategorized';
       fileInput.value = '';
-      document.getElementById('results').innerHTML = ''; // Keep results area clear upon submission
+      document.getElementById('results').innerHTML = ''; 
     } else { alert(res.msg); }
   }
 
@@ -401,21 +400,27 @@
   }
 
   async function searchArchive() {
-    const qText = document.getElementById('search').value;
+    const qText = document.getElementById('search').value.trim();
     const qCat = document.getElementById('searchCategory').value;
     
-    // We send ONLY the text query to the backend to keep its `includes` logic happy
-    const res = await api({ action: 'search', query: qText }, 'query-loader');
+    // OPTIMIZATION: If text is empty but a category is selected, we use the category as our backend query.
+    // This stops the app from trying to download the entire database at once.
+    let backendQuery = qText;
+    if (!backendQuery && qCat) {
+        backendQuery = qCat;
+    }
+
+    const res = await api({ action: 'search', query: backendQuery }, 'query-loader');
     const box = document.getElementById('results');
     box.innerHTML = '';
     
     if(res.success && res.data.length > 0) {
-      // Local filter for Categories (so we don't break backend exact-string matching)
       let finalData = res.data;
-      if (qCat) {
+      
+      // If the user searched by BOTH text and category, we apply the category filter locally
+      if (qText && qCat) {
           finalData = finalData.filter(item => {
-              const fullString = JSON.stringify(item).toLowerCase();
-              return fullString.includes(qCat.toLowerCase());
+              return item.history && item.history.toLowerCase().includes(qCat.toLowerCase());
           });
       }
 
@@ -432,13 +437,9 @@
           imagesHtml += `</div>`;
         }
 
-        // Fix logic here to prioritize actionData and prevent 'action: feed' payload data from breaking the rendering
-        let actionPlanText = item.actionData;
-        if (!actionPlanText && item.action && item.action !== 'feed' && item.action !== 'search') {
-            actionPlanText = item.action;
-        }
+        // FIXED: The backend sends this variable back as "item.action", not "item.actionData"
+        let actionPlanText = item.action || '';
 
-        // Display rendering natively uses white-space: pre-wrap, formatting our packed text beautifully
         box.innerHTML += `
           <div class="card">
             <div class="card-header">
