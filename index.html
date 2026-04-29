@@ -168,8 +168,9 @@
   </div>
 
   <div id="auth">
-    <input type="text" id="user" placeholder="VETERINARIAN ID">
-    <input type="password" id="pass" placeholder="ACCESS KEY">
+    <input type="text" id="user" placeholder="VETERINARIAN ID" autocomplete="off" spellcheck="false" readonly onfocus="this.removeAttribute('readonly');">
+    <input type="password" id="pass" placeholder="ACCESS KEY" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly');">
+    
     <div class="grid">
       <button class="btn btn-glow" onclick="handleAuth('login')">Log In</button>
       <button class="btn btn-outline" onclick="handleAuth('register')">Register Terminal</button>
