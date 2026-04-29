@@ -146,9 +146,9 @@
 </head>
 <body>
 
-<div style="display: none; visibility: hidden; opacity: 0; position: absolute; top: -9999px;">
-  <input type="text" name="username_trap" id="username_trap" autocomplete="username">
-  <input type="password" name="password_trap" id="password_trap" autocomplete="current-password">
+<div style="position: absolute; width: 1px; height: 1px; top: -9999px; left: -9999px; overflow: hidden;" aria-hidden="true">
+  <input type="text" name="username_trap" id="username_trap" tabindex="-1" autocomplete="username">
+  <input type="password" name="password_trap" id="password_trap" tabindex="-1" autocomplete="current-password">
 </div>
 
 <div id="global-loader">
@@ -172,8 +172,16 @@
   </div>
 
   <div id="auth">
-    <input type="text" id="clinic-ident" placeholder="VETERINARIAN ID" autocomplete="new-password" spellcheck="false" data-form-type="other">
-    <input type="password" id="clinic-sec" placeholder="ACCESS KEY" autocomplete="new-password" spellcheck="false" data-form-type="other">
+    <input type="text" id="clinic-ident" placeholder="VETERINARIAN ID" 
+           autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" 
+           data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other">
+           
+    <input type="password" id="clinic-sec" placeholder="ACCESS KEY" 
+           autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" 
+           data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other"
+           readonly 
+           onfocus="this.removeAttribute('readonly');" 
+           onblur="this.setAttribute('readonly', 'readonly');">
     
     <div class="grid">
       <button class="btn btn-glow" onclick="handleAuth('login')">Log In</button>
@@ -319,7 +327,6 @@
   });
 
   async function handleAuth(mode) {
-    // TARGETING THE NEW OBFUSCATED IDs
     const u = document.getElementById('clinic-ident').value;
     const p = document.getElementById('clinic-sec').value;
     if(!u || !p) return alert("Credentials missing.");
