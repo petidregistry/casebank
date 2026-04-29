@@ -168,9 +168,8 @@
   </div>
 
   <div id="auth">
-    <input type="text" id="user" placeholder="VETERINARIAN ID" autocomplete="off" spellcheck="false" readonly onfocus="this.removeAttribute('readonly');">
-    <input type="password" id="pass" placeholder="ACCESS KEY" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly');">
-    
+    <input type="text" id="user" placeholder="VETERINARIAN ID">
+    <input type="password" id="pass" placeholder="ACCESS KEY">
     <div class="grid">
       <button class="btn btn-glow" onclick="handleAuth('login')">Log In</button>
       <button class="btn btn-outline" onclick="handleAuth('register')">Register Terminal</button>
@@ -283,7 +282,7 @@
 </div>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwCDLDpuYCZlh11yWS4xlOETksEgqat5xYwFmrw5Ck2kLp_svEqKvfqUka5xtZGxHk0Bw/exec"; 
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhu26j830OilYRdAzpELI5neRjHzPjg7_jxQaPpc4VQ7GLZcWdcDmybU5yCNCBR2tD1w/exec"; 
   let currentVet = null;
 
   async function api(payload, loaderId = 'global-loader') {
