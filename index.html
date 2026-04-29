@@ -236,7 +236,7 @@
             <optgroup label="14. Preventive Medicine"><option value="Vaccination protocols">Vaccination protocols</option><option value="Deworming">Deworming</option><option value="Parasite control">Parasite control</option></optgroup>
             <optgroup label="15. Exotic Animal Medicine"><option value="Rabbits">Rabbits</option><option value="Reptiles">Reptiles</option><option value="Birds">Birds</option></optgroup>
         </select>
-        <input type="text" id="uid" placeholder="UID / File Number">
+        <input type="text" id="uid" placeholder="Author">
       </div>
       <div class="grid">
         <input type="text" id="name" placeholder="Patient Name">
@@ -443,7 +443,7 @@
           <div class="card">
             <div class="card-header">
               <span style="font-size: 1.1rem;">${item.name || 'UNKNOWN'}</span>
-              <span>UID: ${item.uid || 'N/A'}</span>
+              <span>Author: ${item.uid || 'N/A'}</span>
             </div>
             <div class="card-meta">
               <strong>Sp/Breed:</strong> ${item.breed || 'N/A'} | <strong>Age/Sex:</strong> ${item.ageSex || 'N/A'} | <strong>Wt:</strong> ${item.weight || 'N/A'}
